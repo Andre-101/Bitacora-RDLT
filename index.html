@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#2b1d15">
+<title>Lo que permanece en las manos — Bitácora reflexiva</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="paper-grain" aria-hidden="true"></div><div class="paper-fibres" aria-hidden="true"></div>
+<div class="app" id="app">
+  <header class="topbar">
+    <div class="brand"><div class="brand-mark" aria-hidden="true">L</div><div class="brand-copy"><strong>Lo que permanece en las manos</strong><span>Bitácora reflexiva · memoria, oficio y legado</span></div></div>
+    <div class="controls" aria-label="Controles de navegación">
+      <button class="control primary" id="overviewBtn" title="Vista general (Escape)"><svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/></svg><span class="label">Vista general</span><span class="key">Esc</span></button>
+      <button class="control" id="zoomOutBtn" title="Alejar (flecha izquierda)"><svg viewBox="0 0 24 24"><circle cx="10" cy="10" r="6"/><path d="M14.5 14.5 20 20M7 10h6"/></svg><span class="label">Alejar</span><span class="key">←</span></button>
+      <button class="control" id="zoomInBtn" title="Acercar (flecha derecha)"><svg viewBox="0 0 24 24"><circle cx="10" cy="10" r="6"/><path d="M14.5 14.5 20 20M7 10h6M10 7v6"/></svg><span class="label">Acercar</span><span class="key">→</span></button>
+    </div>
+  </header>
+
+  <main class="viewport" id="viewport">
+    <section class="entry" aria-labelledby="mainTitle">
+      <div class="entry-card">
+        <div class="eyebrow">Bitácora reflexiva · Colombia</div>
+        <h1 id="mainTitle">Lo que <em>permanece</em> en las manos</h1>
+        <p class="subtitle">Bitácora reflexiva sobre memoria, oficio y legado cultural en Colombia</p>
+        <p class="intro-copy">Esta bitácora recorre oficios, materiales, objetos y memorias familiares. La espiral está hecha de contenido y se revela por capas: de lo colectivo a lo íntimo, y de lo íntimo a una reflexión final sobre lo que decidimos preservar.</p>
+        <div class="author-block">
+          <img class="author-photo" id="authorImage" alt="Retrato de Kevin Andres Banguero">
+          <div><h2>Desde dónde miro la tradición</h2><p>Esta bitácora parte de una mirada personal: la de un estudiante que empezó entendiendo la tradición como algo heredado y terminó viéndola como algo que se practica, se transforma y se cuida.</p></div>
+        </div>
+        <div class="author-meta">
+          <div class="meta-lines"><strong>Kevin Andres Banguero</strong><br>10mo semestre · Ingeniería Telemática<br>Departamento de Creatividad<br>Realidades de la tradición: reflexiones sobre oficio artesanal en Colombia</div>
+          <div class="icesi-lockup"><img id="logoImage" alt="Universidad Icesi"></div>
+        </div>
+        <div class="start-row"><button class="start" id="startBtn">Iniciar recorrido →</button><span class="start-hint">También puedes tocar un clúster<br>o usar las flechas del teclado.</span></div>
+      </div>
+    </section>
+
+    <div class="world" id="world" aria-label="Espiral de clústeres de contenido">
+      <div id="clustersLayer"></div>
+      <div class="core" id="core">
+        <button class="core-button" id="coreButton" aria-label="Acercarse al núcleo final"><span class="core-seed"></span><span class="core-label">núcleo</span></button>
+        <div class="core-reveal" id="coreReveal" role="button" tabindex="0" aria-label="Abrir reflexión final">
+          <div class="orbit" aria-hidden="true"><b>Cuidar</b><b>Transformar</b><b>Transmitir</b></div>
+          <div class="core-copy"><span>Núcleo final</span><h3>Preservar no es congelar</h3><p>Cuidar, transformar y transmitir.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="cluster-caption" id="clusterCaption" aria-live="polite"><span class="cap-step"></span><h2></h2><p></p><span class="instruction">Selecciona «Abrir reflexión» para leer el detalle.</span></aside>
+    <nav class="route-rail" id="routeRail" aria-label="Recorrido de la bitácora"></nav>
+  </main>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="detail-panel" id="detailPanel" aria-hidden="true" aria-labelledby="panelTitle">
+  <div class="panel-head"><span class="panel-index" id="panelIndex">Sección</span><button class="panel-close" id="panelClose" aria-label="Cerrar panel">×</button></div>
+  <div class="panel-scroll">
+    <div class="panel-media" id="panelMedia"><img id="panelImage" alt=""><div class="panel-gallery" id="panelGallery" aria-label="Registro fotográfico del objeto realizado" hidden></div><button class="media-expand" id="mediaExpand">Ver pieza completa</button></div><p class="panel-gallery-note" id="panelGalleryNote" hidden>Proceso de creación y resultado final. Selecciona una fotografía para ampliarla.</p>
+    <h2 class="panel-title" id="panelTitle"></h2>
+    <p class="panel-quote" id="panelQuote"></p>
+    <div class="reflection-label">Reflexión</div>
+    <p class="panel-reflection" id="panelReflection"></p>
+    <div class="tags" id="panelTags"></div>
+    <button class="panel-back" id="panelBack">← Volver al recorrido</button>
+  </div>
+</aside>
+
+<div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Vista ampliada de la pieza">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar imagen">×</button><img id="lightboxImage" alt=""><div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
+<div class="sr-only" id="live" aria-live="polite"></div>
+
+<script src="assets/chunks/001.js"></script>
+<script src="assets/chunks/002.js"></script>
+<script src="assets/chunks/003.js"></script>
+<script src="assets/chunks/004.js"></script>
+<script src="assets/chunks/005.js"></script>
+<script src="assets/chunks/006.js"></script>
+<script src="assets/chunks/007.js"></script>
+<script src="assets/chunks/008.js"></script>
+<script src="assets/chunks/009.js"></script>
+<script src="assets/chunks/010.js"></script>
+<script src="assets/chunks/011.js"></script>
+<script src="assets/chunks/012.js"></script>
+<script src="assets/chunks/013.js"></script>
+<script src="assets/chunks/014.js"></script>
+<script src="assets/chunks/015.js"></script>
+<script src="assets/chunks/016.js"></script>
+<script src="assets/chunks/017.js"></script>
+<script src="assets/chunks/018.js"></script>
+<script src="assets/chunks/019.js"></script>
+<script src="assets/chunks/020.js"></script>
+<script src="assets/img-manifest.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
